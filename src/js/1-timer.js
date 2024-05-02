@@ -9,6 +9,8 @@ const minutesRender = document.querySelector('span[data-minutes]');
 const hoursRender = document.querySelector('span[data-hours]');
 const daysRender = document.querySelector('span[data-days]');
 
+
+
 let time = 0;
 let timerId = null;
 let totalTime = null;
@@ -16,6 +18,9 @@ let totalTime = null;
 
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
+
+const inputDateTime = document.querySelector('input#datetime-picker');
+
 
 let deadline = 0;
 
@@ -64,6 +69,7 @@ const timerStart = () => {
         totalTime = convertMs(time); 
         // console.log(totalTime);
         btnStart.disabled = true;
+        inputDateTime.disabled = true;
 
         secondsRender.textContent = totalTime.seconds;
         minutesRender.textContent = totalTime.minutes;
