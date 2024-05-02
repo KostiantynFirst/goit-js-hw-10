@@ -10,7 +10,6 @@ const hoursRender = document.querySelector('span[data-hours]');
 const daysRender = document.querySelector('span[data-days]');
 
 
-
 let time = 0;
 let timerId = null;
 let totalTime = null;
@@ -70,6 +69,8 @@ const timerStart = () => {
         // console.log(totalTime);
         btnStart.disabled = true;
         inputDateTime.disabled = true;
+        // flatpickr('input#datetime-picker', {disabled: true});
+    
 
         secondsRender.textContent = totalTime.seconds;
         minutesRender.textContent = totalTime.minutes;
