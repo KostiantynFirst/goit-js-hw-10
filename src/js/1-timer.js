@@ -1,25 +1,13 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import { Notify } from "notiflix/build/notiflix-notify-aio";
+
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 const secondsRender = document.querySelector('span[data-seconds]');
 const minutesRender = document.querySelector('span[data-minutes]');
 const hoursRender = document.querySelector('span[data-hours]');
 const daysRender = document.querySelector('span[data-days]');
-
-// Initializing Notiflix Notify with custom settings
-Notify.init({
-  fontSize: "1rem",
-  width: "550px",
-  cssAnimationStyle: "from-bottom",
-  useIcon: false,
-  success: {
-    background: "#17d0c6",
-  },
-  info: {
-    background: "#336aea",
-  },
-});
 
 let time = 0;
 let timerId = null;
@@ -31,6 +19,21 @@ btnStart.disabled = true;
 
 let deadline = 0;
 
+const toast = Toastify({
+    text: "Please choose a date in the future",
+    duration: 1500,
+    destination: "1-timer.html",
+    // newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right, #FE2E2E, #AF002A)",
+    },
+    onClick: function(){} // Callback after click
+    })
+
 
 const options = {
     enableTime: true,
@@ -39,18 +42,14 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
 
-        if (selectedDates && selectedDates.length > 0) {
-            const selectedDate = selectedDates[0];
-            if (selectedDate <= new Date()) {
+            if (selectedDates[0] <= new Date()) {
                 // alert("Please choose a date in the future")
-                Notiflix.Notify.warning("Please choose a date in the future");
+                toast.showToast();
+                return;
             } else {
                 btnStart.disabled = false;
-                deadline = selectedDate;
+                deadline = selectedDates[0];
             }
-        } else  {
-                Notify.failure("Please choose a valid date");
-        }
     },
   };
 
@@ -64,14 +63,21 @@ const timerStart = () => {
         time = deadline.getTime() - new Date().getTime();
         totalTime = convertMs(time); 
         // console.log(totalTime);
+        btnStart.disabled = true;
 
         secondsRender.textContent = totalTime.seconds;
         minutesRender.textContent = totalTime.minutes;
         hoursRender.textContent = totalTime.hours;
         daysRender.textContent = totalTime.days;
 
-    if (time < 0) {
-        clearInterval(timerId)
+
+    if (time <= 0) {
+        clearInterval(timerId);
+                secondsRender.textContent = '00';
+                minutesRender.textContent = '00';
+                hoursRender.textContent = '00';
+                daysRender.textContent = '00';
+                
         }
     }, 1000);
 }
