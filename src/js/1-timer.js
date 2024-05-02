@@ -84,6 +84,8 @@ const timerStart = () => {
                 minutesRender.textContent = '00';
                 hoursRender.textContent = '00';
                 daysRender.textContent = '00';
+        
+                inputDateTime.disabled = false;
                 
         }
     }, 1000);
