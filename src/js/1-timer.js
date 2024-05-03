@@ -1,12 +1,8 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
-import Toastify from 'toastify-js'
-import "toastify-js/src/toastify.css"
-
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-
 
 const secondsRender = document.querySelector('span[data-seconds]');
 const minutesRender = document.querySelector('span[data-minutes]');
@@ -42,7 +38,7 @@ const options = {
                     title: 'Error',
                     message: 'Please choose a date in the future',
                     position: 'topRight',
-});
+                });
 
                 return;
             } else {
