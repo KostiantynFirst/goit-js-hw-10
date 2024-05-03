@@ -8,6 +8,7 @@ const fulfilledRadio = document.querySelector('input[value="fulfilled"]');
 const toastSettings = {
   position: 'topRight',
   messageColor: '#ffffff',
+  timeout: 5000,
   close: false,
 };
 
@@ -27,14 +28,14 @@ const handleNotification = (delay, promiseType) =>
       iziToast.show({
         ...toastSettings,
         message: `${PROMISE_MESSAGES[promiseType]} in ${delay}ms`,
-        backgroundColor: promiseType === 'fulfilled' ? 'green' : '#FF2E2E',
+        backgroundColor: promiseType === 'fulfilled' ? 'green' : '#FF7777',
       });
     })
     .catch(delay => {
       iziToast.show({
         ...toastSettings,
         message: `${PROMISE_MESSAGES[promiseType]} in ${delay}ms`,
-        backgroundColor: '#FF2E2E',
+        backgroundColor: '#FF7777',
       });
     });
 
