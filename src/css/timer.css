@@ -9,6 +9,23 @@ body {
     height: 100vh;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.go-back {
+    text-decoration: none;
+    color: #007aff;
+}
+
+.go-back:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
 .go_home {
     margin-right: 10px;
 }
