@@ -4,6 +4,10 @@ import "flatpickr/dist/flatpickr.min.css";
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
+
 const secondsRender = document.querySelector('span[data-seconds]');
 const minutesRender = document.querySelector('span[data-minutes]');
 const hoursRender = document.querySelector('span[data-hours]');
@@ -23,20 +27,6 @@ const inputDateTime = document.querySelector('input#datetime-picker');
 
 let deadline = 0;
 
-const toast = Toastify({
-    text: "Please choose a date in the future",
-    duration: 1500,
-    destination: "1-timer.html",
-    // newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-    background: "linear-gradient(to right, #FE2E2E, #AF002A)",
-    },
-    onClick: function(){} // Callback after click
-    })
 
 
 const options = {
@@ -48,11 +38,21 @@ const options = {
 
             if (selectedDates[0] <= new Date()) {
                 // alert("Please choose a date in the future")
-                toast.showToast();
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Please choose a date in the future',
+                    position: 'topRight',
+});
+
                 return;
             } else {
                 btnStart.disabled = false;
                 deadline = selectedDates[0];
+                iziToast.success({
+                    title: 'OK',
+                    message: 'Successfully selected date! Press Start ',
+                    position: 'topRight',
+                })
             }
     },
   };
